@@ -2,23 +2,23 @@ module WebMonitor
   class Mailer
     def initialize(config)
       @email = config.alert_mail
-      @gmail = config.use_gmail
+      @usegmail = config.use_gmail
       @gmailuser = config.gmail_username
       @gmailpass = config.gmail_password
     end
 
     def send(msg)
       return unless @email
-      if @gmail
+      if @usegmail
+        require 'rubygems'
         require 'gmail'
-
-        gmail = Gmail.new(@gmailuser, @gmailpass)
-        gmail.deliver do
-          to @email
+        gmail = Gmail.new("#{@gmailuser}", "#{@gmailpass}")
+        alert_mail = "#{@email}"
+        email = gmail.generate_message do
+          to alert_mail
           subject "#{msg}"
-          text_part do
-            body "#{msg}"
-          end
+          body "#{msg}"
+          add_file "web-monitor.log"
         end
         gmail.deliver(email)
       else
