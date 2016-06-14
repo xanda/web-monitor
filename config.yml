@@ -1,5 +1,8 @@
-response_time_limit: 3       # in seconds
-alert_mail: alert@domain.com # errors will be sent there
-urls_file: urls.csv          # sites to monitor
-log_file: web-monitor.log    # file with logs
-delay: 1                     # delay between requests
+response_time_limit: 3          # in seconds
+alert_mail: alert@domain.com    # errors will be sent there
+use_gmail: true                 # true if you need to send out email using gmail SMTP (require ruby-gmail)
+gmail_username: test@gmail.com  # gmail user name
+gmail_password: gmailpassword   # gmail password
+urls_file: urls.csv             # sites to monitor
+log_file: web-monitor.log       # file with logs
+delay: 1                        # delay between requests
